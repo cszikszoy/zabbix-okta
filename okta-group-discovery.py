@@ -61,5 +61,7 @@ for item in api_call('groups/' + group_id + '/users'):
     users.append(user)
 
 # dump the result in a discovery array that zabbix understands
-#print(json.dumps(users))
-print(json.dumps(users, indent=4, sort_keys=True))
+print(json.dumps(users))
+
+# dump the results in human readale JSON form
+#print(json.dumps(users, indent=4, sort_keys=True))
