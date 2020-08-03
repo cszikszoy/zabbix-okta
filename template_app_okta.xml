@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2020-07-31T08:15:16Z</date>
+    <groups>
+        <group>
+            <name>Templates/Applications</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template App Okta</template>
+            <name>Template App Okta</name>
+            <description>Okta template supports the following:&#13;
+* Monitoring last login time for users discovered by group</description>
+            <groups>
+                <group>
+                    <name>Templates/Applications</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Okta</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Okta Group {$OKTA_GROUP1}</name>
+                    <key>okta.group.discovery[{$OKTA_NAME},{$OKTA_API_KEY},{$OKTA_GROUP1}]</key>
+                    <lifetime>1h</lifetime>
+                    <description>Discovers users of an Okta group. Creates a &quot;Last Okta login&quot; item for each  discovered user and a trigger which monitors changes.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Last Okta login for {#NAME_F} {#NAME_L} ({#LOGIN})</name>
+                            <type>HTTP_AGENT</type>
+                            <key>okta.login[&quot;{#ID}&quot;]</key>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <description>The user's last login time.&#13;
+&#13;
+Okta API returns UTC timestamps. Javascript preprocessing converts the UTC timestamp to the timezone of the server.</description>
+                            <applications>
+                                <application>
+                                    <name>Okta</name>
+                                </application>
+                            </applications>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Okta - {#GROUP}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.lastLogin</params>
+                                </step>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>if (value) {
+    return new Date(value);
+} else {
+    return value;
+}</params>
+                                </step>
+                                <step>
+                                    <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                                    <params>1h</params>
+                                </step>
+                            </preprocessing>
+                            <timeout>5s</timeout>
+                            <url>http://{$OKTA_NAME}.okta.com/api/v1/users/{#ID}</url>
+                            <headers>
+                                <header>
+                                    <name>authorization</name>
+                                    <value>SSWS {$OKTA_API_KEY}</value>
+                                </header>
+                            </headers>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{diff()}&lt;&gt;0</expression>
+                                    <name>Last Okta login for {#LOGIN} has changed</name>
+                                    <priority>INFO</priority>
+                                    <manual_close>YES</manual_close>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$OKTA_API_KEY}</macro>
+                    <description>Okta API key</description>
+                </macro>
+                <macro>
+                    <macro>{$OKTA_GROUP1}</macro>
+                    <description>Okta group name</description>
+                </macro>
+                <macro>
+                    <macro>{$OKTA_NAME}</macro>
+                    <description>Okta company naame</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>
