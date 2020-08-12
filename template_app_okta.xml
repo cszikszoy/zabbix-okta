@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2020-07-31T08:15:16Z</date>
+    <date>2020-08-12T14:35:18Z</date>
     <groups>
         <group>
             <name>Templates/Applications</name>
@@ -80,6 +80,7 @@ Okta API returns UTC timestamps. Javascript preprocessing converts the UTC times
                                     <expression>{diff()}&lt;&gt;0</expression>
                                     <name>Last Okta login for {#LOGIN} has changed</name>
                                     <priority>INFO</priority>
+                                    <type>MULTIPLE</type>
                                     <manual_close>YES</manual_close>
                                 </trigger_prototype>
                             </trigger_prototypes>
