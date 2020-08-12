@@ -11,7 +11,7 @@ okta_name = sys.argv[1]
 api_key = sys.argv[2]
 
 # get group from args
-group_name = sys.argv[3]
+group_search = sys.argv[3]
 
 # api url
 api_base = 'https://' + okta_name + '.okta.com/api/v1/'
@@ -28,8 +28,14 @@ def api_call(api_request):
     return json.loads(response.text)
 
 
-# search for group name
-group_id = api_call('groups?q=' + group_name)[0]['id']
+# search for group using group_search
+group = api_call('groups?q=' + group_search)[0]
+
+# pull the group id from the result
+group_id = group['id']
+
+# pull the group name from the result
+group_name = group['profile']['name']
 
 # users array
 users = []
