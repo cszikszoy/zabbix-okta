@@ -36,9 +36,7 @@
                             <key>okta.login[&quot;{#ID}&quot;]</key>
                             <trends>0</trends>
                             <value_type>TEXT</value_type>
-                            <description>The user's last login time.&#13;
-&#13;
-Okta API returns UTC timestamps. Javascript preprocessing converts the UTC timestamp to the timezone of the server.</description>
+                            <description>The user's last login time displayed in the timezone of the Zabbix server (or Proxy) performing the Okta API calls.</description>
                             <applications>
                                 <application>
                                     <name>Okta</name>
