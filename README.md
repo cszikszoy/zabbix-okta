@@ -1,1 +1,1 @@
-# zabbix-okta-group-discovery
+# zabbix-okta
