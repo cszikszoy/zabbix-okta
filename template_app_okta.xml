@@ -25,7 +25,7 @@
             </applications>
             <discovery_rules>
                 <discovery_rule>
-                    <name>Okta Group {$OKTA_GROUP1}</name>
+                    <name>Okta group '{$OKTA_GROUP1}' discovery</name>
                     <key>okta.group.discovery[{$OKTA_NAME},{$OKTA_API_KEY},{$OKTA_GROUP1}]</key>
                     <lifetime>1h</lifetime>
                     <description>Discovers users of an Okta group. Creates a &quot;Last Okta login&quot; item for each  discovered user and a trigger which monitors changes.</description>
