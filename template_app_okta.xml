@@ -76,7 +76,7 @@
                             <trigger_prototypes>
                                 <trigger_prototype>
                                     <expression>{diff()}&lt;&gt;0</expression>
-                                    <name>Last Okta login for {#LOGIN} has changed</name>
+                                    <name>Last Okta login for {#NAME_F} {#NAME_L} ({#LOGIN}) has changed</name>
                                     <priority>INFO</priority>
                                     <type>MULTIPLE</type>
                                     <manual_close>YES</manual_close>
