@@ -33,7 +33,7 @@
                         <item_prototype>
                             <name>Last Okta login for {#NAME_F} {#NAME_L} ({#LOGIN})</name>
                             <type>HTTP_AGENT</type>
-                            <key>okta.login[&quot;{#ID}&quot;]</key>
+                            <key>okta.login[&quot;{#GROUP}&quot;,&quot;{#ID}&quot;]</key>
                             <trends>0</trends>
                             <value_type>TEXT</value_type>
                             <description>The user's last login time displayed in the timezone of the Zabbix server (or Proxy) performing the Okta API calls.</description>
